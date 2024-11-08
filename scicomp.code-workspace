@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "02"
+		}
+	],
+	"settings": {
+		"terminal.integrated.cwd": "${workspaceFolder:02}"
+	}
+}
