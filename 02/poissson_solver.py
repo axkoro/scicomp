@@ -1,6 +1,8 @@
+# TODO: Noch nicht die Musterlösung
+
 import numpy as np
 import matplotlib.pyplot as plt
-import imageio
+import imageio.v2 as imageio
 import io
 
 # Config
@@ -47,7 +49,7 @@ def generate_g_vector(t):
         vector[last_row_index + i] = g(grid_size-1, xy_grid[i], t) # bottom row
 
     for i in range(1, grid_size-1): # Left & right boundaries
-        row_index = grid_size + 2*(i-1) # grid_size -> offset from first loop
+        row_index = grid_size + (i-1) # grid_size -> offset from first loop
 
         vector[row_index] = g(i, 0, t)
         vector[row_index+1] = g(i, grid_size-1, t)
@@ -90,11 +92,10 @@ def generate_A_matrix():
 
     return A_mat
 
-def generate_R_matrix(): # TODO
+def generate_R_matrix():
     R_mat = np.zeros((num_inner_values, num_boundary_values))
 
     inner_grid_size = grid_size-2
-
     
     for i in range(1, inner_grid_size+1):
         # Top & bottom rows
@@ -148,8 +149,7 @@ def main():
 
         # Plot
         fig, ax = plt.subplots(figsize=(6, 5)) 
-        cax = ax.imshow(full_grid, origin='lower')
-
+        cax = ax.imshow(full_grid, cmap='jet', origin='lower', vmin=-5, vmax=5)
         ax.set_title(f'Time Step: {t:.2f}')
         fig.colorbar(cax)
 
@@ -159,7 +159,7 @@ def main():
         frames.append(imageio.imread(buf))
         plt.close(fig)
 
-    imageio.mimsave('A2.1-result.gif', frames, duration=0.5)
+    imageio.mimsave('result.gif', frames, duration=0.5)
 
 if __name__ == "__main__":
     main()
