@@ -67,7 +67,38 @@
 			"variant": "cpp",
 			"vector": "cpp",
 			"algorithm": "cpp",
-			"cassert": "cpp"
-		}
+			"cassert": "cpp",
+			"charconv": "cpp",
+			"condition_variable": "cpp",
+			"atomic": "cpp",
+			"bit": "cpp",
+			"*.tcc": "cpp",
+			"compare": "cpp",
+			"concepts": "cpp",
+			"exception": "cpp",
+			"functional": "cpp",
+			"iterator": "cpp",
+			"memory_resource": "cpp",
+			"random": "cpp",
+			"system_error": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"format": "cpp",
+			"text_encoding": "cpp",
+			"thread": "cpp",
+			"list": "cpp",
+			"forward_list": "cpp",
+			"iomanip": "cpp",
+			"numbers": "cpp",
+			"semaphore": "cpp",
+			"span": "cpp"
+		},
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
 	}
 }
