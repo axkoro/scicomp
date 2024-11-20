@@ -6,18 +6,18 @@ CSRMatrix CSRMatrix::operator*(const CSRMatrix& rhs) const {
     std::vector<size_t> res_JC;
     std::vector<double> res_NUM;
 
-    for (size_t i = 0; i < n_rows; i++) { // rows of A
+    for (size_t i = 0; i < n_rows; i++) { // iterate over rows of A
         SPA spa(rhs.n_cols);
 
         size_t A_row_start = IR[i];
         size_t A_row_end = IR[i + 1] - 1;
-        for (size_t k = A_row_start; k <= A_row_end; k++) { // values in row of A
+        for (size_t k = A_row_start; k <= A_row_end; k++) { // iterate over values in current row of A
             double A_val = Num[k];
             size_t A_col = JC[k];
 
             size_t B_row_start = rhs.IR[A_col];
             size_t B_row_end = rhs.IR[A_col + 1] - 1;
-            for (size_t j = B_row_start; j <= B_row_end; j++) { // values in relevant row of B
+            for (size_t j = B_row_start; j <= B_row_end; j++) { // iterate over values in relevant (see SpGEMM) row of B
                 double B_val = rhs.Num[j];
                 size_t B_col = rhs.JC[j];
 
