@@ -22,17 +22,18 @@ private:
 
 public:
   // Blatt 4: SpGEMM
-  /// @brief computes the matrix-vector product using SpMV
-  CSRMatrix operator*(const CSRMatrix &rhs) const;
+  /// @brief computes the matrix-matrix product using SpGEMM
+  CSRMatrix operator*(const CSRMatrix& rhs) const;
 
   //// already implemented:
 
   /// @brief creates a CSRMatrix from three vectors IR, JC, Num
   CSRMatrix(size_t rows, size_t cols, std::vector<size_t> IR,
-            std::vector<size_t> JC, std::vector<double> Num)
-      : n_rows(rows), n_cols(cols), IR(IR), JC(JC), Num(Num) {}
+    std::vector<size_t> JC, std::vector<double> Num)
+    : n_rows(rows), n_cols(cols), IR(IR), JC(JC), Num(Num) {
+  }
 
-  auto operator<=>(const CSRMatrix &) const = default;
+  auto operator<=>(const CSRMatrix&) const = default;
 
   /////// Blatt 3
 
@@ -53,15 +54,30 @@ public:
   CSRMatrix(size_t rows, size_t cols, std::vector<Triplet> triplet_init);
 
   /// @brief computes the matrix-vector product using SpMV
-  DenseVector operator*(const DenseVector &rhs) const;
+  DenseVector operator*(const DenseVector& rhs) const;
 
   /// @brief computes v^T * A * w
-  double bilinear(const DenseVector &vT, const DenseVector &w) const {
+  double bilinear(const DenseVector& vT, const DenseVector& w) const {
     return vT * (*this * w);
   }
 
   // value access
-  double operator()(size_t row, size_t col) const;
+  double operator()(size_t row, size_t col) const
+  {
+    if (row >= n_rows || col >= n_cols)
+    {
+      throw std::out_of_range("Index out of bounds");
+    }
+
+    for (size_t i = IR[row]; i < IR[row + 1]; i++)
+    {
+      if (JC[i] == col)
+      {
+        return Num[i];
+      }
+    }
+    return 0.0;
+  }
 
   // size of matrix
   size_t rows() const { return n_rows; }
@@ -71,7 +87,7 @@ public:
 /////// derived functions (already implemented)
 
 // output matrix
-inline std::ostream &operator<<(std::ostream &os, const CSRMatrix &mat) {
+inline std::ostream& operator<<(std::ostream& os, const CSRMatrix& mat) {
   for (size_t i = 0; i < mat.rows(); ++i) {
     if (i != 0)
       os << "\n";
