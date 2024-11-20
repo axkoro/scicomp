@@ -10,14 +10,14 @@ CSRMatrix CSRMatrix::operator*(const CSRMatrix& rhs) const {
         SPA spa(rhs.n_cols);
 
         size_t A_row_start = IR[i];
-        size_t A_next_row = IR[i + 1];
-        for (size_t k = A_row_start; k < A_next_row; k++) { // values in row of A
+        size_t A_row_end = IR[i + 1] - 1;
+        for (size_t k = A_row_start; k <= A_row_end; k++) { // values in row of A
             double A_val = Num[k];
             size_t A_col = JC[k];
 
             size_t B_row_start = rhs.IR[A_col];
-            size_t B_next_row = rhs.IR[A_col + 1];
-            for (size_t j = B_row_start; j < B_next_row; j++) { // values in respective row of B
+            size_t B_row_end = rhs.IR[A_col + 1] - 1;
+            for (size_t j = B_row_start; j <= B_row_end; j++) { // values in relevant row of B
                 double B_val = rhs.Num[j];
                 size_t B_col = rhs.JC[j];
 
