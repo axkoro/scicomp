@@ -11,10 +11,13 @@
 		},
 		{
 			"path": "04"
+		},
+		{
+			"path": "05"
 		}
 	],
 	"settings": {
-		"terminal.integrated.cwd": "${workspaceFolder:04}",
+		"terminal.integrated.cwd": "${workspaceFolder:05}",
 		"files.associations": {
 			"ostream": "cpp",
 			"__bit_reference": "cpp",
@@ -91,7 +94,8 @@
 			"iomanip": "cpp",
 			"numbers": "cpp",
 			"semaphore": "cpp",
-			"span": "cpp"
+			"span": "cpp",
+			"chrono": "cpp"
 		},
 		"editor.formatOnPaste": true,
 		"editor.formatOnSave": true,
