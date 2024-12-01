@@ -1,0 +1,15 @@
+System A:
+  Average time: 0.249465 ms
+  Min time: 0.246416 ms
+  Max time: 0.291 ms
+
+System B:
+  Average time: 18.0088 ms
+  Min time: 17.8114 ms
+  Max time: 18.5716 ms
+
+System C:
+  Average time: 429.622 ms
+  Min time: 426.81 ms
+  Max time: 458.496 ms
+
