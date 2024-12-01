@@ -95,7 +95,9 @@
 			"numbers": "cpp",
 			"semaphore": "cpp",
 			"span": "cpp",
-			"chrono": "cpp"
+			"chrono": "cpp",
+			"codecvt": "cpp",
+			"fstream": "cpp"
 		},
 		"editor.formatOnPaste": true,
 		"editor.formatOnSave": true,
