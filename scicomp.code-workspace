@@ -14,10 +14,13 @@
 		},
 		{
 			"path": "05"
+		},
+		{
+			"path": "06"
 		}
 	],
 	"settings": {
-		"terminal.integrated.cwd": "${workspaceFolder:05}",
+		"terminal.integrated.cwd": "${workspaceFolder:06}",
 		"files.associations": {
 			"ostream": "cpp",
 			"__bit_reference": "cpp",
