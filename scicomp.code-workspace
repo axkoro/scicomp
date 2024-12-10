@@ -23,7 +23,7 @@
 		}
 	],
 	"settings": {
-		"terminal.integrated.cwd": "${workspaceFolder:06}",
+		"terminal.integrated.cwd": "${workspaceFolder:07}",
 		"files.associations": {
 			"ostream": "cpp",
 			"__bit_reference": "cpp",
