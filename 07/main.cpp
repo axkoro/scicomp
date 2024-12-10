@@ -5,9 +5,7 @@
 #include <random>
 #include <vector>
 
-void sort_parallel(std::vector<int> &vec, int argc, char *argv[]) {
-    MPI_Init(&argc, &argv);
-
+void sort_parallel(std::vector<int> &vec) {
     int rank, group_size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &group_size);
@@ -45,38 +43,46 @@ void sort_parallel(std::vector<int> &vec, int argc, char *argv[]) {
         auto middle = vec.begin() + offsets[group_size - 1];
         std::inplace_merge(vec.begin(), middle, vec.end());
     }
-
-    MPI_Finalize();
 }
 
 int main(int argc, char *argv[]) {
-    // Generate random vector
-    int seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::mt19937 gen(seed);
-    std::uniform_int_distribution<int> dist(0, 50);
+    MPI_Init(&argc, &argv);
 
-    int len = dist(gen);
-    std::vector<int> vec(len);
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    dist = std::uniform_int_distribution<int>(-999, 999);
-    for (int i = 0; i < len; i++) {
-        vec[i] = dist(gen);
+    std::vector<int> vec;
+
+    if (rank == 0) {  // Generate random vector
+        int seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::mt19937 gen(seed);
+        std::uniform_int_distribution<int> dist(0, 50);
+
+        int len = dist(gen);
+        vec.resize(len);
+
+        dist = std::uniform_int_distribution<int>(-999, 999);
+        for (int i = 0; i < len; i++) {
+            vec[i] = dist(gen);
+        }
     }
 
-    // Sort
-    sort_parallel(vec, argc, argv);
+    sort_parallel(vec);
 
-    if (std::is_sorted(vec.begin(), vec.end())) {
-        std::cout << "Successfully sorted!" << '\n';
-    } else {
-        std::cout << "Not sorted!" << '\n';
+    if (rank == 0) {  // Print results
+        if (std::is_sorted(vec.begin(), vec.end())) {
+            std::cout << "Successfully sorted!" << '\n';
+        } else {
+            std::cout << "Not sorted!" << '\n';
+        }
+
+        std::cout << "Sorted data: [ ";
+        for (auto &&val : vec) {
+            std::cout << val << ' ';
+        }
+        std::cout << "]\n";
     }
 
-    std::cout << "[ ";
-    for (auto &&val : vec) {
-        std::cout << val << ' ';
-    }
-    std::cout << "]\n";
-
+    MPI_Finalize();
     return 0;
 }

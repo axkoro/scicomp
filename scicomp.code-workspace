@@ -103,7 +103,8 @@
 			"span": "cpp",
 			"chrono": "cpp",
 			"codecvt": "cpp",
-			"fstream": "cpp"
+			"fstream": "cpp",
+			"numeric": "cpp"
 		},
 		"editor.formatOnPaste": true,
 		"editor.formatOnSave": true,
