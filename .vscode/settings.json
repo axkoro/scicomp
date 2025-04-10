@@ -1,4 +1,5 @@
 {
-    "cmake.buildDirectory": "${workspaceFolder:04}/build",
-    "cmake.sourceDirectory": "${workspaceFolder:04}"
+    "C_Cpp.default.includePath": [
+        "/opt/homebrew/opt/mpich/include"
+    ]
 }
